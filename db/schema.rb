@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_11_03_153337) do
     t.integer "CIN", null: false
     t.integer "phone", null: false
     t.string "permis_id", null: false
+    t.string "password_digest"
     t.integer "age"
     t.date "birthday"
     t.integer "role"
