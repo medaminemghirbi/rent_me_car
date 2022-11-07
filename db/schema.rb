@@ -10,21 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_153337) do
+ActiveRecord::Schema.define(version: 2022_11_04_082323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "cars", force: :cascade do |t|
-    t.integer "color", null: false
-    t.string "body_style", null: false
-    t.integer "doors", null: false
-    t.integer "seats", null: false
-    t.string "engine", null: false
-    t.float "price", null: false
-    t.string "transmission", null: false
-    t.boolean "disponible", null: false
-    t.string "emission_class", null: false
+    t.integer "color"
+    t.string "body_style"
+    t.integer "doors"
+    t.integer "seats"
+    t.string "engine"
+    t.float "price"
+    t.string "transmission"
+    t.boolean "disponible"
+    t.string "emission_class"
     t.bigint "user_id"
     t.bigint "model_id"
     t.datetime "created_at", precision: 6, null: false
@@ -34,9 +55,9 @@ ActiveRecord::Schema.define(version: 2022_11_03_153337) do
   end
 
   create_table "demanderent", force: :cascade do |t|
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.integer "status", default: 0, null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "status", default: 0
     t.integer "user_id"
     t.integer "car_id"
     t.index ["car_id"], name: "index_demanderent_on_car_id"
@@ -45,26 +66,29 @@ ActiveRecord::Schema.define(version: 2022_11_03_153337) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.string "model_name", null: false
+    t.string "model_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "lastname", null: false
-    t.string "firstname", null: false
-    t.string "email", null: false
-    t.integer "CIN", null: false
-    t.integer "phone", null: false
-    t.string "permis_id", null: false
+    t.string "lastname"
+    t.string "firstname"
+    t.string "email"
+    t.integer "CIN"
+    t.integer "phone"
+    t.string "permis_id"
     t.string "password_digest"
     t.integer "age"
     t.date "birthday"
     t.integer "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cars", "models"
   add_foreign_key "cars", "users"
 end
