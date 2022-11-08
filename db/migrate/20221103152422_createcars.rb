@@ -8,7 +8,7 @@ class Createcars < ActiveRecord::Migration[6.0]
     t.string :engine
     t.float :price
     t.string :transmission
-    t.boolean :disponible
+    t.boolean :disponible, default: true
     t.string :emission_class
     t.belongs_to :user, foreign_key: true
     t.belongs_to :model , foreign_key: true
