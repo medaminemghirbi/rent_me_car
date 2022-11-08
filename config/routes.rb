@@ -5,4 +5,7 @@ Rails.application.routes.draw do
       get :confirm_email
     end
   end
+
+  delete :logout, to: 'sessions#logout'
+  get :logged_in, to: 'sessions#logged_in'
 end
