@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_11_04_082323) do
     t.string "engine"
     t.float "price"
     t.string "transmission"
-    t.boolean "disponible"
+    t.boolean "disponible", default: true
     t.string "emission_class"
     t.bigint "user_id"
     t.bigint "model_id"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_11_04_082323) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.string "model_name"
+    t.string "model_car_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

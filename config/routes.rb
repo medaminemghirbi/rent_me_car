@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :sessions, only: [:create]
+  resources :models, only: %i[create index show update destroy]
+  resources :cars, only: %i[create index show update destroy]
   resources :registrations, only: [:create, :confirm_email] do
     member do
       get :confirm_email
