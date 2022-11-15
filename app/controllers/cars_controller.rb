@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-    include CurrentUserConcern
+  before_action :authorize_request
     # //////////////////////////////////  Cars
   
     def index

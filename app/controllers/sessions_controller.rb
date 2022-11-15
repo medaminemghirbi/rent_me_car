@@ -1,21 +1,23 @@
 class SessionsController < ApplicationController
-     include CurrentUserConcern
-   
      def create
-       user = User
+      @user = User
               .find_by(email: params['email'])
               .try(:authenticate, params['password'])
-       if user
-         session[:user_id] = user.id  
+        
+       if @user
+        token = JsonWebToken.encode(user_id: @user.id)
+        time = Time.now + 24.hours.to_i
+        #session[:user_id] = user.id  
          render json: {
+          token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
            status: :created,
            logged_in: true,
-           user_id: user.id ,
-           role: user.role, 
-           user: user
+           user_id: @user.id ,
+           role: @user.role, 
+           user: @user
          }
        else
-         render json: { status: 401 }
+        render json: { error: 'unauthorized' }, status: :unauthorized
        end
      end
 
@@ -23,6 +25,7 @@ class SessionsController < ApplicationController
       
       if @current_user
         render json: {
+          token: token,
           logged_in: true,
           user: @current_user
         }, methods: [:user_image_url]

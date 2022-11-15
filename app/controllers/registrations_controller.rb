@@ -1,7 +1,5 @@
 class RegistrationsController < ApplicationController
-
-
-
+  before_action :authorize_request, except: :create
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
     if user
@@ -38,4 +36,5 @@ class RegistrationsController < ApplicationController
 
     end
   end
+  
 end

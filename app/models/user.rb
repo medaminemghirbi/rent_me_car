@@ -3,8 +3,11 @@ class User < ApplicationRecord
     before_create :confirmation_token
     has_secure_password
     validates_presence_of :email, :role
-    validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_uniqueness_of :email
+    validates :password,
+    length: { minimum: 6 },
+    if: -> { new_record? || !password.nil? }
     has_one_attached :avatar, dependent: :destroy
     enum role: %i[client admin]
     def user_image_url
