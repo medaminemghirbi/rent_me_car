@@ -1,4 +1,4 @@
-class DemandeRent < ApplicationRecord
+class Request < ApplicationRecord
     validates_presence_of :status
     enum status: [:encours, :accepted,:refus ]
     belongs_to :client ,   class_name: "Client", foreign_key: "user_id", optional: true

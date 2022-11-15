@@ -1,4 +1,4 @@
-class CreatedemandeRent < ActiveRecord::Migration[6.0]
+class Createderequests < ActiveRecord::Migration[6.0]
   def change
     create_table :demanderent do |t|
       t.date :start_date 
@@ -7,3 +7,4 @@ class CreatedemandeRent < ActiveRecord::Migration[6.0]
     end
   end
 end
+

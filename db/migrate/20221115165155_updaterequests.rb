@@ -1,4 +1,4 @@
-class UpdatedemandeRent < ActiveRecord::Migration[6.0]
+class Updaterequests < ActiveRecord::Migration[6.0]
   def change
     add_column :demanderent, :user_id, :integer
     add_index  :demanderent, :user_id
