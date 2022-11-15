@@ -17,8 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres # OR your username
-  password: amine
+  username: amine # OR your username
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -82,6 +81,9 @@ test:
 #
 production:
   <<: *default
-  database: rent_car_production
-  username: rent_car
-  password: <%= ENV['RENT_CAR_DATABASE_PASSWORD'] %>
+  host: ec2-3-220-207-90.compute-1.amazonaws.com
+  database: d47l7mj364u6ld
+  port: 5432
+  username: yqiarkrbbxxobw
+  password: 0eaf5203179b4a4e6e7bd8a269b7ce6e3a8fa966169bc774e4fcc7cad7cb6b8f
+

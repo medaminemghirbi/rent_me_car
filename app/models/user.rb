@@ -3,10 +3,13 @@ class User < ApplicationRecord
     before_create :confirmation_token
     has_secure_password
     validates_presence_of :email, :role
-    validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
     validates_uniqueness_of :email
+    validates :password,
+    length: { minimum: 5 },
+    if: -> { new_record? || !password.nil? }
     has_one_attached :avatar, dependent: :destroy
-    enum role: %i[client admin]
+    enum role: %i[client salarié admin]
+    has_many :tokens
     def user_image_url
       # Get the URL of the associated image
       avatar.attached? ? url_for(avatar) : nil
@@ -40,4 +43,6 @@ class User < ApplicationRecord
         self[column] = SecureRandom.urlsafe_base64
       end while User.exists?(column => self[column])
     end
+    def admin?;      false; end
+    def client?;     false; end
   end

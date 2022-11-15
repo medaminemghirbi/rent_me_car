@@ -11,6 +11,7 @@ class Createusers < ActiveRecord::Migration[6.0]
       t.integer :age
       t.date :birthday
       t.integer :role
+      t.boolean :is_archived, default: false
       t.timestamps
     end
 

@@ -4,3 +4,5 @@ class AddEmailConfirmColumnToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :confirm_token, :string
   end
 end
+
+
