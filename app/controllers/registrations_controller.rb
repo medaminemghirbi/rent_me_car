@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :authorize_request, except: :create
+  before_action :authorize_request, except: %i[create confirm_email]
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
     if user
