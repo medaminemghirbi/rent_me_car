@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
      def create
       @user = User
-              .find_by(email: params['email'])
-              .try(:authenticate, params['password'])
+              .find_by(email: params['user']['email'])
+              .try(:authenticate, params['user']['password'])
         
        if @user
         token = JsonWebToken.encode(user_id: @user.id)
@@ -25,7 +25,6 @@ class SessionsController < ApplicationController
       
       if @current_user
         render json: {
-          token: token,
           logged_in: true,
           user: @current_user
         }, methods: [:user_image_url]
