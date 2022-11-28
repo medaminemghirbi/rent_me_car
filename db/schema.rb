@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2022_11_15_165211) do
     t.integer "age"
     t.date "birthday"
     t.integer "role"
+    t.boolean "is_archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "email_confirmed", default: false

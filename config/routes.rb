@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'static#home'
   resources :admin, only: %i[show create index update destroy]
   resources :sessions, only: [:create]
   resources :models, only: %i[create index show update destroy]
