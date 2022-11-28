@@ -3,10 +3,9 @@ class User < ApplicationRecord
     before_create :confirmation_token
     has_secure_password
     validates_presence_of :email, :role
-    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_uniqueness_of :email
     validates :password,
-    length: { minimum: 6 },
+    length: { minimum: 5 },
     if: -> { new_record? || !password.nil? }
     has_one_attached :avatar, dependent: :destroy
     enum role: %i[client admin]
