@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
       user.email_confirmed = true
       user.confirm_token = nil
       user.save
-      redirect_to 'https://rentmecar-backend.herokuapp.com/login'
+      redirect_to 'https://rentmecar.herokuapp.com/login'
     else
       render json: { status: 500 }
 

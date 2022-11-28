@@ -9,7 +9,19 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
-
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://rentmecar-backend.herokuapp.com/' #replace with your own url
+  Rails.application.routes.default_url_options[:host] = 'https://rentmecar-backend.herokuapp.com/'
+  config.action_mailer.default_url_options = { host: host }
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "riden5211@gmail.com",
+    :password             => "mgtlvzgbqhygiqkg",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
 
