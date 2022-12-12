@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
               .find_by(email: params['user']['email'])
               .try(:authenticate, params['user']['password'])
         
-       if @user
+       if @user.email_confirmed == true
+        
         token = JsonWebToken.encode(user_id: @user.id)
         time = Time.now + 24.hours.to_i
         #session[:user_id] = user.id  
