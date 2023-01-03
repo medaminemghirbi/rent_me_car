@@ -36,5 +36,6 @@ module RentCar
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: 'ren_me_car'
     config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore, key: 'ren_me_car')
+    config.active_job.queue_adapter = :resque
   end
 end

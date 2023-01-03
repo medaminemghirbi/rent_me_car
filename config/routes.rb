@@ -1,3 +1,4 @@
+require 'resque/server'
 Rails.application.routes.draw do
   root to: 'static#home'
   resources :admin, only: %i[show create index update destroy]
@@ -10,7 +11,8 @@ Rails.application.routes.draw do
       get :confirm_email
     end
   end
-
+  get :gotoresque, to: 'admin#gotoresque'
+  mount Resque::Server.new, at: '/jobs'
   delete :logout, to: 'sessions#logout'
   get :logged_in, to: 'sessions#logged_in'
 end 

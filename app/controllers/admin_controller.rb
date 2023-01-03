@@ -1,10 +1,19 @@
 class AdminController < ApplicationController
     before_action :authorize_request
+    include CurrentUserConcern
     def index
     @users = User.all.select { |m| m.role == 'client' || m.role == 'admin' }
     render json: @users, methods: [:user_image_url]
     end 
 
+    def gotoresque
+      byebug
+      if @current_user.role == "admin"
+        redirect_to "/jobs"
+      else
+        render json: "you are not an admin to acces this URL"
+      end
+    end
 
     def updateimageadmin
         @user = User.find(params[:id])
