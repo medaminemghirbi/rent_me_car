@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  include CurrentUserConcern
      def create
       @user = User
               .find_by(email: params['user']['email'])
@@ -8,7 +9,7 @@ class SessionsController < ApplicationController
         
         token = JsonWebToken.encode(user_id: @user.id)
         time = Time.now + 24.hours.to_i
-        #session[:user_id] = user.id  
+        session[:user_id] = @user.id  
          render json: {
           token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
            status: :created,

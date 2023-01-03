@@ -9,6 +9,7 @@ class User < ApplicationRecord
     if: -> { new_record? || !password.nil? }
     has_one_attached :avatar, dependent: :destroy
     enum role: %i[client admin]
+    
     def user_image_url
       # Get the URL of the associated image
       avatar.attached? ? url_for(avatar) : nil
@@ -42,4 +43,6 @@ class User < ApplicationRecord
         self[column] = SecureRandom.urlsafe_base64
       end while User.exists?(column => self[column])
     end
+    def admin?;      false; end
+    def client?;     false; end
   end
