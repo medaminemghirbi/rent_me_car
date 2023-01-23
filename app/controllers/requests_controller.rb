@@ -50,7 +50,6 @@ class RequestsController < ApplicationController
     end
   
     def post_params2
-        # lazm tbaath kol shy fl update 
         params.permit(:status, :start_date, :end_date, :car_id, :user_id  )
     end
   

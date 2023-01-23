@@ -8,8 +8,8 @@ class User < ApplicationRecord
     length: { minimum: 5 },
     if: -> { new_record? || !password.nil? }
     has_one_attached :avatar, dependent: :destroy
-    enum role: %i[client admin]
-    
+    enum role: %i[client salarié admin]
+    has_many :tokens
     def user_image_url
       # Get the URL of the associated image
       avatar.attached? ? url_for(avatar) : nil

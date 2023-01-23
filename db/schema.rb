@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_165211) do
+ActiveRecord::Schema.define(version: 2023_01_20_161633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2022_11_15_165211) do
     t.index ["car_id"], name: "index_requests_on_car_id"
     t.index ["user_id", "car_id"], name: "index_requests_on_user_id_and_car_id", unique: true
     t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.integer "user_id", null: false
+    t.datetime "expired_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expired_at"], name: "index_tokens_on_expired_at"
+    t.index ["token"], name: "index_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_tokens_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

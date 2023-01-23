@@ -15,7 +15,7 @@ class AdminController < ApplicationController
       end
     end
 
-    def updateimageadmin
+    def updateadminimage
         @user = User.find(params[:id])
     
         if @user.update(image_admin)
