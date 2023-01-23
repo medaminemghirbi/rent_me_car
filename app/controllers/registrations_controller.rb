@@ -36,5 +36,23 @@ class RegistrationsController < ApplicationController
 
     end
   end
-  
+  def logged_in
+    byebug
+    if @current_user
+      byebug
+      render json: {
+        logged_in: true,
+        user: @current_user
+      }, methods: [:user_image_url]
+    else
+      render json: {
+        logged_in: false
+      }
+    end
+  end
+
+  def logout
+    reset_session
+    render json: { status: 200, logged_out: true }
+  end
 end

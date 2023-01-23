@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get :gotoresque, to: 'admin#gotoresque'
   patch '/updateadminimage/:id', to: 'admin#updateadminimage'
   mount Resque::Server.new, at: '/jobs'
-  delete :logout, to: 'sessions#logout'
-  get :logged_in, to: 'sessions#logged_in'
+  delete :logout, to: 'registrations#logout'
+  get :logged_in, to: 'registrations#logged_in'
 end 
