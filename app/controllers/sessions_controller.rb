@@ -8,13 +8,9 @@ class SessionsController < ApplicationController
             render json: { error: 'User does not exist' }, status: :unauthorized
         elsif @user.email_confirmed == false
             render json: { error: 'please confirm your email' }
-        elsif @user.email_confirmed == true
-            session[:user_id] = @user.id           
+        elsif @user.email_confirmed == true      
             token = JsonWebToken.encode(user_id: @user.id)
             time = Time.now + 24.hours.to_i
-            Token.create(token: token,
-            expired_at:time,
-            user_id: @user.id)
             render json: {
               token: token,
               exp: time.strftime("%m-%d-%Y %H:%M")
