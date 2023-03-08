@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
             render json: { error: 'User does not exist' }, status: :unauthorized
         elsif @user.email_confirmed == false
             render json: { error: 'please confirm your email' }
-        elsif @user.email_confirmed == true      
+        elsif @user.email_confirmed == true
             token = JsonWebToken.encode(user_id: @user.id)
             time = Time.now + 24.hours.to_i
             render json: {

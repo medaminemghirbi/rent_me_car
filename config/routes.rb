@@ -16,4 +16,4 @@ Rails.application.routes.draw do
   mount Resque::Server.new, at: '/jobs'
   delete :logout, to: 'registrations#logout'
   get :logged_in, to: 'registrations#logged_in'
-end 
+end

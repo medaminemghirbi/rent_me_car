@@ -24,7 +24,7 @@ class RegistrationsController < ApplicationController
       password_confirmation: params['user']['password_confirmation'],
       role: params['user']['role'].to_i
     )
-    
+
     if user
       UserMailer.registration_confirmation(user).deliver
       session[:user_id] = user.id

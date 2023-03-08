@@ -4,7 +4,7 @@ class AdminController < ApplicationController
     def index
     @users = User.all.select { |m| m.role == 'client' || m.role == 'admin' }
     render json: @users, methods: [:user_image_url]
-    end 
+    end
 
     def gotoresque
       byebug
@@ -17,10 +17,10 @@ class AdminController < ApplicationController
 
     def updateadminimage
         @user = User.find(params[:id])
-    
+
         if @user.update(image_admin)
           render json: @user, methods: [:user_image_url]
-    
+
         else
           render json: @user.errors, statut: :unprocessable_entity
         end
@@ -31,11 +31,11 @@ class AdminController < ApplicationController
 
     def updateadmin
         @user = User.find(params[:id])
-        
+
         if @user.update(post_parasmadmin)
-    
+
           render json: @user, methods: [:user_image_url]
-    
+
         else
           render json: @user.errors, statut: :unprocessable_entity
         end
@@ -46,11 +46,11 @@ class AdminController < ApplicationController
 
     def archive_client
         @user = User.find(params[:id])
-        
+
         if @user.update(archive_client_params)
-    
+
           render json: @user, methods: [:user_image_url]
-    
+
         else
           render json: @user.errors, statut: :unprocessable_entity
         end
