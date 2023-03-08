@@ -12,7 +12,6 @@
       your username is: <%= @user.email %>.<br>
       your account password is: <%= @user.password %>.<br>
     </h4>
-    
     <h4>
       To login to the site, just follow this link to confirm account : <a href="<%= confirm_email_registration_url(@user.confirm_token) %>">click to confirm Inscription</a>.
     </h4>
